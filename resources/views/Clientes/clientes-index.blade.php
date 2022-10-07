@@ -51,8 +51,9 @@
                         <div class="form-group mb-6">
                             <x-ui.select-component label="Ciudad" name="ciudad" id="ciudad">
                                 <option selected>Selecciona una opcion</option>
-                                <option value="1">Ciudad1</option>
-                                <option value="2">ciudad2</option>
+                                @foreach ($cities as $city)                                    
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
                             </x-ui.select-component>
                         </div>
                         <div class="form-group mb-6">

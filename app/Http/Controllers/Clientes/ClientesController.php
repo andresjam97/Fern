@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clientes;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Client;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -12,7 +13,8 @@ class ClientesController extends Controller
 {
     public function index()
     {
-        return view('Clientes.clientes-index');
+        $cities = City::all();
+        return view('Clientes.clientes-index',compact('cities'));
     }
 
     public function sendCliente(Request $request)
