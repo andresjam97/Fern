@@ -27,6 +27,12 @@ Route::get('/dashboard', function () {
 Route::prefix('clientes')->middleware(['auth'])->group(function () {
     Route::get('index', [ClientesController::class, 'index'])->name('form-clientes');
     Route::post('sendCliente', [ClientesController::class, 'sendCliente'])->name('send-cliente');
+
+    Route::get('table', [ClientesController::class, 'table'])->name('table-clientes');
+
+    Route::get('editClient/{id}', [ClientesController::class, 'editClient'])->name('client-edit-vw');
+
+    Route::post('editClientReq', [ClientesController::class, 'editClientReq'])->name('client-edit-form');
 });
 
 

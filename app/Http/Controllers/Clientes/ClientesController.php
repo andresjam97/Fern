@@ -47,13 +47,36 @@ class ClientesController extends Controller
             $address->city_id = $request->ciudad;
             $address->save();
 
-    
+
             return back()->with('success','Registro Realizado Exitosamente');
 
         } catch (\Throwable $th) {
             return back()->withErrors($th->getMessage());
             //throw new Exception($th->getMessage());
         }
-        
+
+    }
+
+    public function table()
+    {
+        $clients = Client::all();
+        return view('Clientes.clientes-table',compact('clients'));
+    }
+
+    public function editClient($id)
+    {
+        $client = Client::find($id);
+        $cities = City::all();
+        return view('Clientes.clientes-edit',compact(['client','cities']));
+    }
+
+    public function editClientReq(Request $request)
+    {
+        try {
+            $client = 
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        return $request;
     }
 }
