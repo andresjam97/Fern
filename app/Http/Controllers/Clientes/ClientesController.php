@@ -11,6 +11,14 @@ use Exception;
 
 class ClientesController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:client-list|client-create|client-edit|client-delete', ['only' => ['table']]);
+         $this->middleware('permission:client-create', ['only' => ['index','sendCliente']]);
+         $this->middleware('permission:product-edit', ['only' => ['editClient','editClientReq']]);
+        //  $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $cities = City::all();
@@ -73,7 +81,7 @@ class ClientesController extends Controller
     public function editClientReq(Request $request)
     {
         try {
-            $client = 
+
         } catch (\Throwable $th) {
             //throw $th;
         }
