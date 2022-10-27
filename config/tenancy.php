@@ -9,6 +9,7 @@ use Stancl\Tenancy\Database\Models\Tenant;
 return [
     'tenant_model' => Empresa::class,
     'id_generator' => null,
+    'tenant_model' => \App\Tenant::class,
 
     // 'domain_model' => Domain::class,
 

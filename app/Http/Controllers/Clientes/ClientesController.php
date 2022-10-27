@@ -15,7 +15,7 @@ class ClientesController extends Controller
     {
          $this->middleware('permission:client-list|client-create|client-edit|client-delete', ['only' => ['table']]);
          $this->middleware('permission:client-create', ['only' => ['index','sendCliente']]);
-         $this->middleware('permission:product-edit', ['only' => ['editClient','editClientReq']]);
+         $this->middleware('permission:client-edit', ['only' => ['editClient','editClientReq']]);
         //  $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
 

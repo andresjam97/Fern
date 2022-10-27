@@ -1,6 +1,7 @@
-<table class="table-auto w-full">
-    <thead class="border-b">
-        <tr class="bg-gray-200">
+<div class="table-responsive">
+    <table class="table table-stripped table-auto w-full">
+        <thead>
+        <tr>
             @foreach ($headers as $header)
                 <th class="text-left p-4 font-medium">
                     {{ $header }}
@@ -12,3 +13,5 @@
         {{ $slot }}
     </tbody>
 </table>
+
+</div>

@@ -1,6 +1,16 @@
 <div>
-    <label for="{{$attributes->get('id')}}">{{ $label ?? '' }}</label>
-    <input
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-        {{ $attributes }}>
+    @if ($attributes->has('label'))
+        <label for="{{ $attributes->get('id') }}">{{ $attributes->get('label') }}</label>
+    @endif
+    <input type="{{ $type }}"
+        {{ $attributes->class([
+            'form-control',
+            'is-invalid' => $attributes->has('name') && $errors->has($attributes->get('name')),
+        ]) }} />
+
+    @error($attributes->get('name'))
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>

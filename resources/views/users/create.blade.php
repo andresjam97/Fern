@@ -72,7 +72,6 @@
 {!! Form::close() !!}
 
 
-<p class="text-center text-primary"><small>Tutorial by Mywebtuts.com</small></p>
 </div>
 
 @endsection

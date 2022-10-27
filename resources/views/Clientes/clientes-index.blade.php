@@ -1,14 +1,52 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Clientes') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
+@section('content')
+    <x-ui.card title="Agregar Cliente">
+        <form action="{{ route('send-cliente') }}" method="POST" autocomplete="off">
+            @csrf
+            <div class="form-group">
+                <x-ui.select-component label="Tipo Cliente" name="tipoCliente" id="tipoCliente">
+                    <option selected>Selecciona una opcion</option>
+                    <option value="1">Formulador</option>
+                    <option value="2">Distribuidor</option>
+                </x-ui.select-component>
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="NIT" type="text" name="NIT" id="NIT" placeholder="Nit" />
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="Nombre" type="text" name="nombre" id="nombre" placeholder="Nombre" />
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="Email" type="email" name="mail" id="mail" placeholder="Email" />
+            </div>
+            <div class="form-group">
+                <x-ui.select-component label="Ciudad" name="ciudad" id="ciudad">
+                    <option selected>Selecciona una opcion</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    @endforeach
+                </x-ui.select-component>
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="Direccion" type="text" name="direccion" id="direccion"
+                    placeholder="Direccion" />
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="Telefono - 1" type="phone" name="tel1" id="tel1"
+                    placeholder="Telefono 1" />
+            </div>
+            <div class="form-group">
+                <x-ui.input-component label="Telefono - 2" type="phone" name="tel2" id="tel2"
+                    placeholder="Telefono 2" />
+            </div>
+            <br>
+            <button type="submit" class="btn btn-md btn-success">Enviar</button>
+        </form>
+    </x-ui.card>
+@endsection
 
-
-
-    <div class="py-12">
+{{-- <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -30,43 +68,28 @@
                     <form action="{{ route('send-cliente') }}" method="POST" autocomplete="off">
                         @csrf
                         <div class="form-group mb-6">
-                            <x-ui.select-component label="Tipo Cliente" name="tipoCliente" id="tipoCliente">
-                                <option selected>Selecciona una opcion</option>
-                                <option value="1">Formulador</option>
-                                <option value="2">Distribuidor</option>
-                            </x-ui.select-component>
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="NIT" type="text" name="NIT" id="NIT"
-                                placeholder="Nit" />
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="Nombre" type="text" name="nombre" id="nombre"
-                                placeholder="Nombre" />
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="Email" type="email" name="mail" id="mail"
-                                placeholder="Email" />
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.select-component label="Ciudad" name="ciudad" id="ciudad">
-                                <option selected>Selecciona una opcion</option>
-                                @foreach ($cities as $city)                                    
-                                <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </x-ui.select-component>
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="Direccion" type="text" name="direccion" id="direccion"
-                                placeholder="Direccion" />
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="Telefono - 1" type="phone" name="tel1" id="tel1"
-                                placeholder="Telefono 1" />
+
                         </div>
                         <div class="form-group mb-6">
-                            <x-ui.input-component label="Telefono - 2" type="phone" name="tel2" id="tel2"
-                                placeholder="Telefono 2" />
+
                         </div>
                         <button type="submit"
                             class="
@@ -91,5 +114,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </div> --}}

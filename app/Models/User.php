@@ -3,16 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Pedidos\Pedido_Cabeza;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, BelongsToTenant, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -61,5 +62,10 @@ class User extends Authenticatable
     public function worksIn(Empresa $empresa)
     {
         return $this->empresa_id == $empresa->id;
+    }
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido_Cabeza::class);
     }
 }
