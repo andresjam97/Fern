@@ -1,6 +1,6 @@
 <div class="table-responsive">
-    <table class="table table-stripped table-auto w-full">
-        <thead>
+    <table class="table table-stripped table-hover">
+        <thead class="table-dark">
         <tr>
             @foreach ($headers as $header)
                 <th class="text-left p-4 font-medium">

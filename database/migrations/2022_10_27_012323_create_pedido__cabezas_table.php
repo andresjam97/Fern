@@ -26,7 +26,6 @@ return new class extends Migration
             $table->date('fecha_entrega')->nullable();
             $table->boolean('procesado')->nullable();
             $table->string('observacion_rechazo')->nullable();
-            $table->string('tipo_ingreso')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('client_id')->references('id')->on('clients');

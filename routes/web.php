@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Clientes\ClientesController;
+use App\Http\Controllers\Pedidos\PedidosController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('permissions', PermissionsController::class);
 });
 
 
@@ -43,6 +46,13 @@ Route::prefix('clientes')->middleware(['auth'])->group(function () {
     Route::post('editClientReq', [ClientesController::class, 'editClientReq'])->name('client-edit-form');
 });
 
+Route::prefix('pedidos')->middleware(['auth'])->group(function () {
+    Route::get('index', [PedidosController::class, 'index'])->name('pedidos.list');
+    Route::get('create', [PedidosController::class, 'create'])->name('pedidos.create');
+    Route::get('store/{id}', [PedidosController::class, 'createPedido'])->name('pedidos.store');
+    Route::post('storeProduct/{id}', [PedidosController::class, 'createProduct'])->name('pedidos.store.product');
+    Route::get('detail/{id}', [PedidosController::class, 'detail'])->name('pedidos.create.products');
+    Route::get('show/{id}', [PedidosController::class, 'show'])->name('pedidos.edit');
+    Route::get('destroy/{id}', [PedidosController::class, 'delete'])->name('pedidos.destroy');
+});
 
-
-// require __DIR__.'/auth.php';
