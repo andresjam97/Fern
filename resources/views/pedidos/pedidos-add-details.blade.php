@@ -39,11 +39,11 @@
                     <tr>
                         <td>{{ $detalle->id }}</td>
                         <td>{{ $detalle->product->name }}</td>
-                        <td>Pendiente si se deja en tabla detalles o se lleva por relacion</td>
+                        <td>${{ number_format($detalle->precio) }}</td>
                         <td>{{ $detalle->cantidad }}</td>
                         <td>{{ $detalle->bonificadas }}</td>
                         <td>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['pedidos.destroy', $detalle->id], 'style' => 'display:inline']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
@@ -59,9 +59,9 @@
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#detailModal">
                             <i class="bi bi-search"></i>
                         </button>
-                        <button class="btn btn-primary">
+                        <a href="{{route('pedidos.aditions',$cabeza->id)}}" class="btn btn-primary">
                             <i class="bi bi-check"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

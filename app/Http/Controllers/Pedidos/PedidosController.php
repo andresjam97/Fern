@@ -62,10 +62,17 @@ class PedidosController extends Controller
     public function createProduct(Request $request, $pedido)
     {
         try {
+            $cabeza = Pedido_Cabeza::find($pedido);
+            $cliente = $cabeza->client()->first();
+
+            $product = Product::find($request->idProd);
+            $price = $product->prices()->where('type', $cliente->client_type)->first();
+
             $detail = new Pedido_Detalle;
             $detail->cantidad = $request->cantidad;
             $detail->bonificadas = $request->bonificadas;
             $detail->id_producto = $request->idProd;
+            $detail->precio = $price->price;
             $detail->id_cabeza = $pedido;
             $detail->save();
             return back()->with('success','Producto Registrado Con Exito');
@@ -76,13 +83,62 @@ class PedidosController extends Controller
         return $request;
     }
 
+    public function aditions($id)
+    {
+        $pedido = Pedido_Cabeza::find($id);
+
+
+        $products = Product::with([
+            'prices' => fn($query) => $query->where('type', $pedido->client->client_type)
+        ])->paginate(10);
+
+        return view('pedidos.pedidos-aditions',['pedido'=>$pedido, 'products' => $products]);
+    }
+
+    public function aditionsStore(Request $request, $ped)
+    {
+        $request->validate([
+
+            'adjuntoOrden' => 'required|mimes:pdf,xlx,csv,xlsx,jpeg,jpg,docx',
+
+        ]);
+
+        $fileName = time().'.'.$request->adjuntoOrden->extension();
+
+
+
+        $request->adjuntoOrden->storeAs('pedidos', $fileName);
+
+        $pedido = Pedido_Cabeza::find($ped);
+        $pedido->observacion = $request->observacion;
+        $pedido->orden_compra = $request->ordenCompra;
+        $pedido->fecha_orden = $request->fechaOrden;
+        $pedido->fecha_entrega = $request->fechaEntrega;
+        $pedido->adjunto = $fileName;
+        $pedido->estado = 'ENVIADO';
+        $pedido->save();
+
+        return redirect()->route('pedidos.list')->with('success' , 'Pedido Con El ID '.$pedido->id.' Se ha Enviado Con Exito');
+    }
+
     public function show($id)
     {
-        return $id;
+        $pedido = Pedido_Cabeza::find($id);
+
+
+        $products = Product::with([
+            'prices' => fn($query) => $query->where('type', $pedido->client->client_type)
+        ])->paginate(10);
+
+        return view('pedidos.pedidos-aditions',['pedido'=>$pedido, 'products' => $products]);
     }
 
     public function delete($id)
     {
-        return $id;
+        $detail = Pedido_Detalle::find($id);
+        $detail->delete();
+        return back()->with('success','Producto Eliminado');
     }
+
+
 }

@@ -24,16 +24,9 @@
                 <td>{{$pedido->client->nit}}</td>
                 <td>{{$pedido->client->name}}</td>
                 <td>
-                    <div class="btn-group" role="group" aria-label="Actions">
-                        @can('role-edit')
-                        <a class="btn btn-primary" href="{{ route('pedidos.edit',$pedidos->id) }}">Edit</a>
-                        @endcan
-                        @can('role-delete')
-                            {!! Form::open(['method' => 'DELETE','route' => ['pedidos.destroy', $pedido->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
-                        @endcan
-                    </div>
+                    <center>
+                        <a class="btn btn-primary" href="{{ route('pedidos.edit',$pedido->id) }}">Edit</a>
+                    </center>
                 </td>
             </tr>
         @endforeach

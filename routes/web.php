@@ -51,7 +51,13 @@ Route::prefix('pedidos')->middleware(['auth'])->group(function () {
     Route::get('create', [PedidosController::class, 'create'])->name('pedidos.create');
     Route::get('store/{id}', [PedidosController::class, 'createPedido'])->name('pedidos.store');
     Route::post('storeProduct/{id}', [PedidosController::class, 'createProduct'])->name('pedidos.store.product');
+
     Route::get('detail/{id}', [PedidosController::class, 'detail'])->name('pedidos.create.products');
+
+    Route::get('aditions/{id}', [PedidosController::class, 'aditions'])->name('pedidos.aditions');
+
+    Route::post('aditions/{id}/store', [PedidosController::class, 'aditionsStore'])->name('pedidos.aditions.store');
+
     Route::get('show/{id}', [PedidosController::class, 'show'])->name('pedidos.edit');
     Route::get('destroy/{id}', [PedidosController::class, 'delete'])->name('pedidos.destroy');
 });
