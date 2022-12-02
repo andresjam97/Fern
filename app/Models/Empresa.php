@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Stancl\Tenancy\Database\Models\Tenant;
+use Illuminate\Database\Eloquent\Model;
 
-class Empresa extends Tenant
+class Empresa extends Model
 {
     use HasFactory;
 
@@ -22,19 +22,4 @@ class Empresa extends Tenant
         return $this->hasMany(User::class, 'empresa_id', 'id');
     }
 
-    /**
-    * Tenant Configuration for using autoincrement ids
-    */
-    public function getIncrementing()
-    {
-        return true;
-    }
-
-    public static function getCustomColumns(): array
-    {
-     return [
-        'id',
-        'name'
-     ];
-    }
 }
