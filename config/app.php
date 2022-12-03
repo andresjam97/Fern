@@ -197,6 +197,8 @@ return [
         Laraveles\Spanish\SpanishServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        Spatie\Permission\PermissionServiceProvider::class,
+
     ],
 
     /*

@@ -21,7 +21,7 @@ class CreateAdminUserSeeder extends Seeder
         $company = Empresa::create([
             'name' => 'Fern'
         ]);
-        
+
         $user = User::create([
             'name' => 'Ivan Andres Castro Ruiz',
             'email' => 'admin@gmail.com',
@@ -31,11 +31,11 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
         $role = Role::create(['name' => 'Admin']);
+        $user->assignRole([$role->id]);
 
         $permissions = Permission::pluck('id','id')->all();
 
         $role->syncPermissions($permissions);
 
-        $user->assignRole([$role->id]);
     }
 }
