@@ -9,7 +9,7 @@
             </a>
         </div>
     </div>
-    <x-ui.table-component :headers="['ID', 'Cliente', 'NIT', 'E-mail', 'Telefono', 'Direccion', 'Acciones']">
+    <x-ui.table-component :headers="['ID', 'Cliente', 'NIT', 'E-mail', 'Telefono', 'Direcciones', 'Acciones']">
         @foreach ($clients as $client)
             <tr>
                 <td>
@@ -27,8 +27,24 @@
                 <td>
                     {{ $client->phone_number_1 }}
                 </td>
-                <td>
-                    {{ $client->addresses->first()->address_line }}
+                <td align="center">
+                    <x-ui.modal title="Direcciones Cliente" id="addressesModal">
+                        <a class="btn btn-success" href="#" role="button">Agregar</a>
+                        <x-ui.table-component :headers="['Direccion','ciudad','Accion']">
+                            @foreach ($client->addresses as $address)
+                                <tr>
+                                    <td>{{$address->address_line}}</td>
+                                    <td>{{$address->city->name}}</td>
+                                    <td>
+                                        <a class="btn btn-danger" href="#" role="button">Eliminar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </x-ui.table-component>
+                    </x-ui.modal>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addressesModal">
+                            <i class="bi bi-card-checklist"></i>
+                    </button>
                 </td>
                 <td class="p-4">
                     <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">

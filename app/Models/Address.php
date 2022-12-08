@@ -20,7 +20,7 @@ class Address extends Model
      */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class, 'id', 'city_id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 
     /**

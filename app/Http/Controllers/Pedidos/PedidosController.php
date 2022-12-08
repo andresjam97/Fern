@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class PedidosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:orders-list|orders-create|orders-edit', ['only' => ['index','createPedido','create','detail','createProduct','aditions','aditionsStore','show','delete']]);
+
+        // $this->middleware('permission:orders-edit', ['only' => ['create','store']]);
+
+    }
+
     public function index()
     {
         $data = User::find(auth()->user()->id)->pedidos()->paginate(10);

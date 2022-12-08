@@ -34,7 +34,6 @@ class ClientesController extends Controller
                 'nombre' => 'required',
                 'mail' => 'required',
                 'ciudad' => 'required',
-                'direccion' => 'required',
                 'tel1' => 'required',
                 'tel2' => 'required'
             ]);
@@ -49,11 +48,11 @@ class ClientesController extends Controller
             $cliente->created_by = auth()->user()->id;
             $cliente->save();
 
-            $address = new Address;
-            $address->address_line = $request->direccion;
-            $address->client_id = $cliente->id;
-            $address->city_id = $request->ciudad;
-            $address->save();
+            // $address = new Address;
+            // $address->address_line = $request->direccion;
+            // $address->client_id = $cliente->id;
+            // $address->city_id = $request->ciudad;
+            // $address->save();
 
 
             return back()->with('success','Registro Realizado Exitosamente');
